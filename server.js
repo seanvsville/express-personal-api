@@ -42,8 +42,10 @@ app.get('/api', function api_index(req, res) {
     base_url: "http://apricot-cobbler-58165.herokuapp.com", // CHANGE ME
     endpoints: [
       {method: "GET", path: "/api", description: "Describes all available endpoints"},
-      {method: "GET", path: "/api/profile", description: "Information about me", }, // CHANGE ME
-      {method: "POST", path: "/api/profile/albums", description: "E.g. Add a new favorite album"} // CHANGE ME
+      {method: "GET", path: "/api/profile", description: "Information about me", },
+      {method: "POST", path: "/api/albums", description: "E.g. Add a new favorite album"},
+      {method: "GET", path: "/api/albums", description: "Get information about my favorite albums"},
+      {method: "DELETE", path: "/api/albums", description: "Delete an album you dislike"},
     ]
   });
 });
