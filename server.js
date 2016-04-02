@@ -8,18 +8,35 @@ var bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: true }));
 
 /************
- * DATABASE *
+ * DATABASE SETUP and CONFIGURATION *
  ************/
+//require express in our app
+var express = require('express'),
+ bodyParser = require('body-parser');
 
-// var db = require('./models');
+// connect to db models
+var db = require('./models');
+
+// generate a new express app and call it 'app'
+var app = express();
+
+// Serve static files from the `/public` directory:
+// i.e. `/images`, `/scripts`, `/styles`
+app.use(express.static('public'));
+
+// body parser config to accept our datatypes
+app.use(bodyParser.urlencoded({ extended: true }));
 
 /**********
  * ROUTES *
  **********/
 
-// Serve static files from the `/public` directory:
-// i.e. `/images`, `/scripts`, `/styles`
-app.use(express.static('public'));
+ // define a root route: localhost:3000/
+ app.get('/', function (req, res) {
+   res.sendFile('views/index.html' , { root : __dirname});
+ });
+
+
 
 /*
  * HTML Endpoints
@@ -46,6 +63,7 @@ app.get('/api', function api_index(req, res) {
       {method: "POST", path: "/api/albums", description: "E.g. Add a new favorite album"},
       {method: "GET", path: "/api/albums", description: "Get information about my favorite albums"},
       {method: "DELETE", path: "/api/albums", description: "Delete an album you dislike"},
+      {mmethod: "PUT", path: "/api/albums", description: "Found a typo? Correct my information"}
     ]
   });
 });

@@ -1,6 +1,8 @@
-var mongoose = require("mongoose");
+var mongoose = require('mongoose');
 mongoose.connect( process.env.MONGOLAB_URI ||
                   process.env.MONGOHQ_URL ||
-                  "mongodb://localhost/personal-api");
+                  'mongodb://localhost/personal-api');
 
-// module.exports.Campsite = require("./campsite.js.example");
+module.exports.Profile = require('./profile.js');
+module.exports.Album = require('./album.js');
+module.exports.Arist = require('./artist.js');
