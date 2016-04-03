@@ -9,7 +9,7 @@ var personal_info = [
   github_link: 'https://github.com/seanvsville',
   github_profile_image: 'https://avatars0.githubusercontent.com/u/16998442?v=3&s=460',
   current_city: 'Hayward',
-  favorite_albums: ['On a Wire', 'OK, Computer', 'Good Kid, M.A.A.D City', 'Reasonabl Doubt', 'Something Wicked This Way Comes']
+  favorite_albums: ['On a Wire', 'OK, Computer', 'Good Kid, M.A.A.D City', 'Reasonable Doubt', 'Something Wicked This Way Comes']
 }];
 
 var albums_list = [
@@ -87,18 +87,18 @@ var albums_list = [
   });
 });
 
-db.Album.remove({}, function(err, profile) {
-console.log('remove all albums');
-db.Album.create(albums_list, function(err, albums){
-  if (err) {
-    console.log(err);
-    return;
+  db.Album.remove({}, function(err, profile) {
+  console.log('remove all albums');
+  db.Album.create(albums_list, function(err, albums){
+    if (err) {
+      console.log(err);
+      return;
   }
   console.log(profile);
   console.log('recreated albums');
   console.log("created", profile.length, "albums");
 
-});
+  });
 });
 
 db.Artist.remove({}, function(err, profile) {
@@ -112,8 +112,10 @@ db.Artist.create(artists_list, function(err, artists){
   console.log('recreated artists');
   console.log("created", profile.length, "artists");
 
+  });
 });
-});
+
+/*process.exit();*/
 
     /*db.Album.remove({}, function(err, albums){
       console.log('removed all albums');

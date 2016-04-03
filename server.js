@@ -54,14 +54,45 @@ app.use(bodyParser.urlencoded({ extended: true }));
     });
  });
 
- // get all movies
+ // get all albums
 app.get('/api/albums', function (req, res) {
-  // send all movies as JSON response
-  db.Album.find().populate('artist')
-    .exec(function(err, albums) {
+  // send all albums as JSON response
+  db.Album.find(function (err, albums) {
       if (err) { return console.log("index error: " + err); }
       res.json(albums);
   });
+});
+
+// create new album
+app.post('/api/albums', function (req, res) {
+  var newAlbum = new db.Album({
+    tile: req.body.title,
+    albumCover: req.body.albumCover,
+    releaseDate: req.body.releaseDate,
+  });
+
+  // create artist from req.body
+  db.Artist.create({name: req.body.artist}, function(err, artist){
+    if (err) {
+      return console.log(err);
+    }
+
+    // add this artist to the movie
+    newAlbum.artist = artist;
+
+    // save newAlbum to database
+    newAlbum.save(function(err, album){
+      if (err) {
+        return console.log('save error: ' + err);
+      }
+      console.log('saved ', album.title);
+
+      // send back the album
+      res.json(album);
+    });
+  });
+
+
 });
 
 /*
