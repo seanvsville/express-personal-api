@@ -9,7 +9,7 @@ var personal_info = [
   github_link: 'https://github.com/seanvsville',
   github_profile_image: 'https://avatars0.githubusercontent.com/u/16998442?v=3&s=460',
   current_city: 'Hayward',
-  favorite_albums: ['On a Wire', 'OK Computer', 'Good Kid, M.A.A.D City', 'Reasonabl Doubt', 'Something Wicked This Way Comes']
+  favorite_albums: ['On a Wire', 'OK, Computer', 'Good Kid, M.A.A.D City', 'Reasonabl Doubt', 'Something Wicked This Way Comes']
 }];
 
 var albums_list = [
@@ -73,18 +73,49 @@ var albums_list = [
     }
   ];
 
-  db.Director.remove({}, function(err, directors) {
-  console.log('removed all directors');
-  db.Director.create(directors_list, function(err, directors){
+  db.Profile.remove({}, function(err, profile) {
+  console.log('remove all profile information');
+  db.Profile.create(personal_info, function(err, profile){
     if (err) {
       console.log(err);
       return;
     }
-    console.log('recreated all directors');
-    console.log("created", directors.length, "directors");
+    console.log(profile);
+    console.log('recreated profile');
+    console.log("created", profile.length, "profile");
 
+  });
+});
 
-    db.Album.remove({}, function(err, albums){
+db.Album.remove({}, function(err, profile) {
+console.log('remove all albums');
+db.Album.create(albums_list, function(err, albums){
+  if (err) {
+    console.log(err);
+    return;
+  }
+  console.log(profile);
+  console.log('recreated albums');
+  console.log("created", profile.length, "albums");
+
+});
+});
+
+db.Artist.remove({}, function(err, profile) {
+console.log('remove all profile information');
+db.Artist.create(artists_list, function(err, artists){
+  if (err) {
+    console.log(err);
+    return;
+  }
+  console.log(artists);
+  console.log('recreated artists');
+  console.log("created", profile.length, "artists");
+
+});
+});
+
+    /*db.Album.remove({}, function(err, albums){
       console.log('removed all albums');
       albums_list.forEach(function (albumData) {
         var album = new db.Album({
@@ -108,10 +139,8 @@ var albums_list = [
           });
         });
       });
-    });
+    });*/
 
-  });
-});
 
 
 // var new_campsite = {description: 'Sharp rocks. Middle of nowhere.'}

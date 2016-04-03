@@ -42,7 +42,27 @@ app.use(bodyParser.urlencoded({ extended: true }));
    res.sendFile('views/index.html' , { root : __dirname});
  });
 
+ // get profile
+ app.get('/api/profile', function (req, res) {
+   // send all profile as JSON response
+   db.Profile.find().populate('profile')
+    .exec(function(err, profile) {
+      if (err) {
+        return console.log('index error: ' + err);
+      }
+      res.json(profile);
+    });
+ });
 
+ // get all movies
+app.get('/api/albums', function (req, res) {
+  // send all movies as JSON response
+  db.Album.find().populate('artist')
+    .exec(function(err, albums) {
+      if (err) { return console.log("index error: " + err); }
+      res.json(albums);
+  });
+});
 
 /*
  * HTML Endpoints

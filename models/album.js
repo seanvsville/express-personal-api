@@ -1,6 +1,6 @@
 var mongoose = require('mongoose'),
       Schema = mongoose.Schema,
- songsSchema = new Schema({
+ songSchema = new Schema({
    name: String
  });
 
