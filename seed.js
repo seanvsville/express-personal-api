@@ -3,6 +3,15 @@
 
 var db = require('./models');
 
+var personal_info = [
+ {
+  name: 'Sean Van Ho',
+  github_link: 'https://github.com/seanvsville',
+  github_profile_image: 'https://avatars0.githubusercontent.com/u/16998442?v=3&s=460',
+  current_city: 'Hayward',
+  favorite_albums: ['On a Wire', 'OK Computer', 'Good Kid, M.A.A.D City', 'Reasonabl Doubt', 'Something Wicked This Way Comes']
+}];
+
 var albums_list = [
   {
     title: 'On a Wire',

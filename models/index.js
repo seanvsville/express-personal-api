@@ -5,4 +5,4 @@ mongoose.connect( process.env.MONGOLAB_URI ||
 
 module.exports.Profile = require('./profile.js');
 module.exports.Album = require('./album.js');
-module.exports.Arist = require('./artist.js');
+module.exports.Artist = require('./artist.js');
