@@ -6,7 +6,10 @@ var mongoose = require('mongoose'),
 
 var AlbumSchema = new Schema({
   title: String,
-  artist: String,
+  artist: {
+    type: Schema.Types.ObjectId,
+    ref: 'Artist'
+  },
   yearReleased: String,
   albumCover: String,
   songs: String,

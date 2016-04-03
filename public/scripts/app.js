@@ -26,11 +26,11 @@ $(document).ready(function(){
 
 $('#newAlbumForm').on('submit', function(e) {
     e.preventDefault();
-    console.log('new album serialized', $(this).serialize());
+    console.log('new album serialized', $(this).serializeArray());
     $.ajax({
       method: 'POST',
       url: '/api/albums',
-      data: $(this).serialize(),
+      data: $(this).serializeArray(),
       success: newAlbumSuccess,
       error: newAlbumError,
     });
