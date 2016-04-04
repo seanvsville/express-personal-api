@@ -177,8 +177,7 @@ app.get('/api', function api_index(req, res) {
       {method: "GET", path: "/api/profile", description: "Information about me", },
       {method: "POST", path: "/api/albums", description: "E.g. Add a new favorite album"},
       {method: "GET", path: "/api/albums", description: "Get information about my favorite albums"},
-      {method: "DELETE", path: "/api/albums", description: "Delete an album you dislike"},
-      {method: "PUT", path: "/api/albums", description: "Found a typo? Correct my information"}
+      {method: "DELETE", path: "/api/albums/:album_id/songs/:song_id", description: "Delete an album you dislike"}
     ]
   });
 });
