@@ -55,7 +55,7 @@ $('#newAlbumForm').on('submit', function(e) {
       url: '/api/albums/'+$(this).attr('data-id')+'/songs',
       data: $(this).serializeArray(),
       success: newSongSuccess,
-      error: newSongSuccess
+      error: newSongError
     });
   });
 
@@ -128,7 +128,7 @@ function newSongSuccess(json) {
   var albumId = album._id;
   for(var index = 0; index < allAlbums.length; index++) {
     if(allAlbums[index]._id === albumId) {
-      allAlbum[index] = album;
+      allAlbums[index] = album;
       break;
     }
   }

@@ -100,14 +100,14 @@ app.post('/api/albums', function (req, res) {
     // get album id from url params (`req.params`)
     console.log('albums delete', req.params);
     var albumId = req.params.id;
-    // find the index of the book we want to remove
+    // find the index of the album we want to remove
     db.Album.findOneAndRemove({ _id: albumId }, function (err, deletedAlbum) {
       res.json(deletedAlbum);
     });
   });
 
   // add song to existing album
-  app.post('/api/albums/:book_id/songs', function (req, res) {
+  app.post('/api/albums/:album_id/songs', function (req, res) {
     var albumId = req.params.album_id;
     db.Album.findById(albumId)
     .populate('artist')
@@ -118,10 +118,10 @@ app.post('/api/albums', function (req, res) {
         res.status(500).json("error does not compute");
       }
       else if (foundAlbum === null) {
-        res.status(404).json({newSongError: "No book found by this ID"});
+        res.status(404).json({newSongError: "No album found by this ID"});
       }
       else {
-        foundAlbum.characters.push(req.body);
+        foundAlbum.songs.push(req.body);
         foundAlbum.save();
         res.status(201).json(foundAlbum);
       }

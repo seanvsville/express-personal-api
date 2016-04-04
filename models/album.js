@@ -12,9 +12,8 @@ var AlbumSchema = new Schema({
   },
   yearReleased: String,
   albumCover: String,
-  songs: String,
+  songs: [songSchema]
 });
 
 var Album = mongoose.model('Album', AlbumSchema);
-
 module.exports = Album;
