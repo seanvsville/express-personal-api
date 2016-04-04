@@ -148,7 +148,7 @@ app.post('/api/albums', function (req, res) {
           // save the found album with the song deleted
           foundAlbum.save();
           // send back the found album without the song
-          res.json(foundalbum);
+          res.json(foundAlbum);
         }
       });
   });
