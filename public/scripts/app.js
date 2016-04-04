@@ -1,5 +1,6 @@
 console.log("Sanity Check: JS is working!");
 var template;
+var $albumsList;
 var allAlbums = [];
 
 $(document).ready(function(){
@@ -35,6 +36,28 @@ $('#newAlbumForm').on('submit', function(e) {
       error: newAlbumError,
     });
   });
+
+  $albumsList.on('click', '.deleteBtn', function() {
+    console.log('clicked delete button to', '/api/albums/'+$(this).attr('data-id'));
+    $.ajax({
+      method: 'DELETE',
+      url: '/api/albums/'+$(this).attr('data-id'),
+      success: deleteAlbumSuccess,
+      error: deleteAlbumError,
+    });
+  });
+
+/*  $albumsList.on('submit', '#addSongForm', function(e) {
+    e.preventDefault();
+    console.log('new song');
+    $.ajax({
+      method: 'POST',
+      url: '/api/albums/'+$(this).attr('data-id')+'/songs',
+      data: $(this).serializeArray(),
+      success: newSongSuccess,
+      error: newSongSuccess,
+    });
+  });*/
 
 //end of document ready
 });
@@ -80,3 +103,38 @@ function newAlbumError() {
   console.log('uh ohhhhh');
   $('#albumTarget').append('Failed to load albums, is the server working?');
 }
+
+function deleteAlbumSuccess(json) {
+  var album = json;
+  console.log(json);
+  var albumId = album._id;
+  console.log('delete album', albumId);
+  // find the album with the correct ID and remove it from our allAlbums array
+  for(var index = 0; index < allAlbums.length; index++) {
+    if(allAlbums[index]._id === albumId) {
+      allAlbums.splice(index, 1);
+      break;
+    }
+  }
+  render();
+}
+
+function deleteAlbumError() {
+  console.log('delete album error!');
+}
+
+/*function newSongSuccess(json) {
+  var album = json;
+  var albumId = album._id;
+  for(var index = 0; index < allAlbums.length; index++) {
+    if(allAlbums[index]._id === albumId) {
+      allAlbum[index] = album;
+      break;
+    }
+  }
+  render();
+}
+
+function newSongError() {
+  console.log('adding new song error!');
+}*/

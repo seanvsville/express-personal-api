@@ -9,7 +9,7 @@ var personal_info = [
   github_link: 'https://github.com/seanvsville',
   github_profile_image: 'https://avatars0.githubusercontent.com/u/16998442?v=3&s=460',
   current_city: 'Hayward',
-  favorite_albums: ['On a Wire', 'OK, Computer', 'Good Kid, M.A.A.D City', 'Reasonable Doubt', 'Something Wicked This Way Comes']
+  favorite_albums: ['On a Wire', 'OK Computer', 'Good Kid, M.A.A.D City', 'Reasonable Doubt', 'Something Wicked This Way Comes']
 }];
 
 var albums_list = [
@@ -43,7 +43,7 @@ var albums_list = [
   },
   {
     title: 'Something Wicked This Way Comes',
-    artist: 'The Herbalizer',
+    artist: 'The Herbaliser',
     yearReleased: 'March 19, 2002',
     albumCover: 'https://ninjatune.net/images/releases/something-wicked-this-way-comes-main.jpg',
     songs: ['Something Wicked', 'Verbal Anime', 'Time 2 Build', 'Carat Blag', 'Mr Holmes', 'Good Girl Gone Bad', 'The Hard Stuff', 'Distinguished Jamaican English', 'Worldwide Connected', 'The Turnaround', 'Battle of Bongo Hill', 'It Aint Nuttin', 'Unsungsong']
@@ -107,9 +107,9 @@ db.Artist.create(artists_list, function(err, artists){
         releaseDate: albumData.releaseDate
       });
       db.Artist.findOne({name: albumData.artist}, function (err, foundartist) {
-        console.log('found artist ' + foundartist.name + ' for album ' + album.title);
         if (err) {
           console.log(err);
+          console.log('found artist ' + foundartist.name + ' for album ' + album.title);
           return;
         }
         album.artist = foundartist;

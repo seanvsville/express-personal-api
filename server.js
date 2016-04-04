@@ -57,7 +57,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
  // get all albums
 app.get('/api/albums', function (req, res) {
   // send all albums as JSON response
-  db.Album.find(function (err, albums) {
+  db.Album.find()
+    .populate('artist')
+    .exec(function (err, albums) {
       if (err) { return console.log("index error: " + err); }
       res.json(albums);
   });
@@ -66,7 +68,7 @@ app.get('/api/albums', function (req, res) {
 // create new album
 app.post('/api/albums', function (req, res) {
   var newAlbum = new db.Album({
-    tile: req.body.title,
+    title: req.body.title,
     albumCover: req.body.albumCover,
     releaseDate: req.body.releaseDate,
   });
@@ -92,6 +94,18 @@ app.post('/api/albums', function (req, res) {
     });
   });
 
+  // delete album
+  app.delete('/api/albums/:id', function (req, res) {
+    // get album id from url params (`req.params`)
+    console.log('albums delete', req.params);
+    var albumId = req.params.id;
+    // find the index of the book we want to remove
+    db.Album.findOneAndRemove({ _id: albumId }, function (err, deletedAlbum) {
+      res.json(deletedAlbum);
+    });
+  });
+
+/*app.post('/api/albums/:album_id/songs')*/
 
 });
 
