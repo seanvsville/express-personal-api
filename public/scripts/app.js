@@ -33,7 +33,7 @@ $('#newAlbumForm').on('submit', function(e) {
       url: '/api/albums',
       data: $(this).serializeArray(),
       success: newAlbumSuccess,
-      error: newAlbumError,
+      error: newAlbumError
     });
   });
 
@@ -43,11 +43,11 @@ $('#newAlbumForm').on('submit', function(e) {
       method: 'DELETE',
       url: '/api/albums/'+$(this).attr('data-id'),
       success: deleteAlbumSuccess,
-      error: deleteAlbumError,
+      error: deleteAlbumError
     });
   });
 
-/*  $albumsList.on('submit', '#addSongForm', function(e) {
+  $albumsList.on('submit', '#addSongForm', function(e) {
     e.preventDefault();
     console.log('new song');
     $.ajax({
@@ -55,9 +55,9 @@ $('#newAlbumForm').on('submit', function(e) {
       url: '/api/albums/'+$(this).attr('data-id')+'/songs',
       data: $(this).serializeArray(),
       success: newSongSuccess,
-      error: newSongSuccess,
+      error: newSongSuccess
     });
-  });*/
+  });
 
 //end of document ready
 });
@@ -123,7 +123,7 @@ function deleteAlbumError() {
   console.log('delete album error!');
 }
 
-/*function newSongSuccess(json) {
+function newSongSuccess(json) {
   var album = json;
   var albumId = album._id;
   for(var index = 0; index < allAlbums.length; index++) {
@@ -137,4 +137,4 @@ function deleteAlbumError() {
 
 function newSongError() {
   console.log('adding new song error!');
-}*/
+}

@@ -93,6 +93,7 @@ app.post('/api/albums', function (req, res) {
       res.json(album);
     });
   });
+});
 
   // delete album
   app.delete('/api/albums/:id', function (req, res) {
@@ -105,9 +106,28 @@ app.post('/api/albums', function (req, res) {
     });
   });
 
-/*app.post('/api/albums/:album_id/songs')*/
+  // add song to existing album
+  app.post('/api/albums/:book_id/songs', function (req, res) {
+    var albumId = req.params.album_id;
+    db.Album.findById(albumId)
+    .populate('artist')
+    .exec(function (err, foundAlbum){
+      console.log(foundAlbum);
+      // if error, return status code 500: internal server error
+      if (err) {
+        res.status(500).json("error does not compute");
+      }
+      else if (foundAlbum === null) {
+        res.status(404).json({newSongError: "No book found by this ID"});
+      }
+      else {
+        foundAlbum.characters.push(req.body);
+        foundAlbum.save();
+        res.status(201).json(foundAlbum);
+      }
+    });
+  });
 
-});
 
 /*
  * HTML Endpoints
