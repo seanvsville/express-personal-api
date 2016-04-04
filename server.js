@@ -128,6 +128,30 @@ app.post('/api/albums', function (req, res) {
     });
   });
 
+  // Delete a song associated with a album
+  app.delete('/api/albums/:album_id/songs/:song_id', function (req, res) {
+    // Get album id from url params (`req.params`)
+    var albumId = req.params.album_id;
+    var songId = req.params.song_id;
+    db.Album.findById(albumId)
+      .populate('artist')
+      .exec(function(err, foundAlbum) {
+        if (err) {
+          res.status(500).json({error: err.message});
+        } else if (foundAlbum === null) {
+          res.status(404).json({error: "No Album found by this ID"});
+        } else {
+          // find the song by id
+          var deletedSong = foundAlbum.songs.id(songId);
+          // delete the found song
+          deletedSong.remove();
+          // save the found album with the song deleted
+          foundAlbum.save();
+          // send back the found album without the song
+          res.json(foundalbum);
+        }
+      });
+  });
 
 /*
  * HTML Endpoints

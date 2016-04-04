@@ -59,6 +59,14 @@ $('#newAlbumForm').on('submit', function(e) {
     });
   });
 
+  $albumsList.on('click', '.deleteSong', function() {
+   $.ajax({
+     method: 'DELETE',
+     url: '/api/albums/'+$(this).data('albumid')+'/songs/'+$(this).data('songid'),
+     success: deleteSongSuccess
+   });
+ });
+
 //end of document ready
 });
 
@@ -81,11 +89,11 @@ function onError(e) {
 }
 
 function profileSuccess(json) {
-$('#profileTarget').append('<h1>' + json[0].name + '</h1>Github Profile:</br><img src="' +
-  json[0].github_profile_image + '" target="_blank" id="profile"><ul><li>Github Link: <a href="' +
-  json[0].github_link + '">seanvsville</a></li><li>Current City: ' +
-  json[0].current_city + '</li>' + '<li>Favorite Albums: <ul><li>' +
-  json[0].favorite_albums.join('; ') + '</li></ul></li></ul>');
+$('#profileTarget').append('<h1>' + json[0].name + '</h1></br><img src="' +
+  json[0].github_profile_image + 'target="_blank" id="profile"><hr><i class="fa fa-github-square"></i>' + ' <a href="' +
+  json[0].github_link + '">seanvsville</a><br><i class="fa fa-home"></i> ' +
+  json[0].current_city + '<br><br><i class="fa fa-heart"></i><i class="fa fa-music"></i><br><ul>' +
+  json[0].favorite_albums.join('<br>') + '</ul><hr>');
 }
 
 function profileError(e) {
@@ -137,4 +145,17 @@ function newSongSuccess(json) {
 
 function newSongError() {
   console.log('adding new song error!');
+}
+
+function deleteSongSuccess(json) {
+  var album = json;
+  var albumId = album._id;
+  // find the album with the correct ID and update it
+  for(var index = 0; index < allAlbums.length; index++) {
+    if(allAlbums[index]._id === albumId) {
+      allAlbums[index] = album;
+      break;  // we found our song - no reason to keep searching (this is why we didn't use forEach)
+    }
+  }
+  render();
 }

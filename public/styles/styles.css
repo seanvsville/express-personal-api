@@ -1,3 +1,10 @@
+@font-face {
+  font-family: "Glasgow";
+  src:url('../fonts/StrongGlasgow.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 body {
   color: #333;
   font-family: Helvetica, Arial, sans-serif;
@@ -5,8 +12,14 @@ body {
 }
 
 h1 {
+  font-family: "Glasgow";
   margin-top: 100px;
-  text-align: center;
+  text-align: left;
+  text-decoration: underline;
+}
+
+h4 {
+  font-family: "Glasgow";
 }
 
 #profile {

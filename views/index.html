@@ -14,6 +14,9 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
 
+    <!-- FONT AWESOME -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
     <!-- APPLICATION SCRIPTS -->
     <script src="/scripts/app.js"></script>
   </head>
@@ -21,7 +24,7 @@
     <div class="container">
       <div class="row">
         <div class="col-md-8 col-md-offset-2">
-          <h1>Express Personal API</h1>
+          <h1>Favorites Albums</h1>
           <h4><a href="/api">Read My API Documentation</a></h4>
         </div>
       </div>
@@ -47,9 +50,9 @@
           <strong>{{title}}</strong>
           by {{artist.name}}
           <br>
-          <b>Songs</b>
+          <b>Songs:</b>
           {{#each songs}}
-            {{name}}
+            {{name}} <button class="deleteSong btn btn-danger" data-albumid={{../_id}} data-songid={{_id}}><b>x</b></button>
           {{/each}}
         <button type='button' name='button' class='deleteBtn btn btn-danger pull-right' data-id={{_id}}>Delete</button>
       </p>
