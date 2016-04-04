@@ -89,7 +89,7 @@ function onError(e) {
 }
 
 function profileSuccess(json) {
-$('#profileTarget').append('<h1>' + json[0].name + '</h1></br><img src="' +
+$('#profileTarget').append('<h1>' + json[0].name + '</h1><img src="' +
   json[0].github_profile_image + 'target="_blank" id="profile"><hr><i class="fa fa-github-square"></i>' + ' <a href="' +
   json[0].github_link + '">seanvsville</a><br><i class="fa fa-home"></i> ' +
   json[0].current_city + '<br><br><i class="fa fa-heart"></i><i class="fa fa-music"></i><br><ul>' +
